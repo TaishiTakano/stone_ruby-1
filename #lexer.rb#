@@ -44,6 +44,8 @@ class Lexer
       @hasMore = false
       return
     end
+
+    @lineNo = 
   end
   
   def addToken(lineNo, matcher)
