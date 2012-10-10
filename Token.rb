@@ -1,17 +1,18 @@
 #!/Users/saxsir/.rvm/rubies/ruby-1.9.3-p194/bin/ruby
 
 class Token
-  EOF = Token.new
-  EOL = '\\n'
 
-  lineNumber =  nil
-  
-  def Token(line)
-    lineNumber = line
+  def initialize(line = 0)
+    @text = ""
+    @lineNumber = line
   end
-  
+
+  @@EOF = Token.new(-1)
+  @@EOL = '\\n'
+
+
   def getLineNumber
-    return lineNumber
+    return @lineNumber
   end
   
   def isIdentifier
@@ -26,11 +27,21 @@ class Token
     return false
   end
 
-  def getNumber
-    return nil
-  end
+#  def getNumber
+#    return nil
+#  end
   
   def getText
-    return ''
+    @text
   end
+
+  def getEOF
+    @@EOF
+  end
+
+  def getEOL
+    @@EOL
+  end
+
+  attr_accessor :lineNumber
 end

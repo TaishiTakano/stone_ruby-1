@@ -1,0 +1,21 @@
+class Hoge
+  # @@tmp = "hogehoge"  
+  
+@@str = "str"
+
+
+  def initialize
+   @tmp = "piyopiyo"
+  end
+
+  def getStr
+    return @@str
+  end 
+
+  attr_accessor :tmp, :str
+end
+
+h = Hoge.new
+
+puts h.tmp
+puts h.getStr

@@ -2,7 +2,7 @@
 
 class Lexer
 
-  def initialize(r)
+  def initialize
     regexPat = ""
     r = Regexp.new(regexPat)
     @queue = []
