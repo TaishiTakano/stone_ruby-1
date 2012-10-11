@@ -3,7 +3,7 @@ require './token.rb'
 require './lexer.rb'
 require './code-dialog.rb'
 
-l = Lexer.new(CodeDialog.new)
+l = Lexer.new
 t = Token.new
 
 p l
