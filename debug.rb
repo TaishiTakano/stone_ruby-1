@@ -1,17 +1,16 @@
 require './lib/lexer.rb'
 require './lib/token.rb'
 
-@text = ""
+text = ""
 
 while true
   print ">>"
   s = gets.chomp
   if s == "Q" then break end
-  @text +=  s
+  text +=  s
 end
 
-l = Lexer.new(@text)
-t = Token.new 
+l = Lexer.new(text)
 
 tokens = Array.new()  
 tokens = l.read

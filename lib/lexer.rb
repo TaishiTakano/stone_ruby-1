@@ -35,13 +35,20 @@ class Lexer
     return true
   end
   
-  def readLine    
-    regexPat = "\\s*((//.*)|([0-9]+)|(\"(\\\\\"|\\\\\\\\|\\\\n|[^\"])*\")" + "|[A-Z_a-z][A-Z_a-z0-9]*|==|<=|>=|&&|\\|\\||\\p{Punct})?"
+  def readLine
+    pat1 = '[0-9]+'
+    pat2 = '[A-Z_a-z][A-Z_a-z0-9]*|==|<=|>=&&\|\||\p{Punct}'
+    pat3 = '"(\\"|\\\\|\\n|[^"])*"'
+
+    # regexPat = "\\s*((//.*)|([0-9]+)|(\"(\\\\\"|\\\\\\\\|\\\\n|[^\"])*\")" + "|[A-Z_a-z][A-Z_a-z0-9]*|==|<=|>=|&&|\\|\\||\\p{Punct})?"
+    # regexPat = "\\s*((//.*)|([0-9]+)|(\"(\\\\\"|\\\\\\\\|\\\\n|[^\"])*\")" + "|[A-Z_a-z][A-Z_a-z0-9]*|==|<=|>=|&&|\\|\\||[!-\/:-@\[-`{-~])?"
     r = Regexp.new(regexPat)
     s = StringScanner.new(@text)
     
     while !s.eos?
-      @queue.push s.scan(r)
+      tmp = s.scan(r)
+      @queue.push tmp
+      p tmp
     end
 
     @hasmore = false
