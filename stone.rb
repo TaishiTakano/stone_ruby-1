@@ -1,4 +1,5 @@
 require 'sinatra'
+require './lib/line_number_reader'
 require './lib/lexer.rb'
 require './lib/token.rb'
 
@@ -12,19 +13,16 @@ end
 
 post '/result' do
   text = params[:text]
-  l = Lexer.new(text)
-  t = Token.new 
-  tokens = Array.new()  
-  #tmp = Array.new(3, "foo")
-  #tokens = tmp
-  tokens = l.read
-  #tokens = t.getText
-
-  # while true
-    # if l.read = Token.new.getEOF then break end 
-    # t = l.read
-    # tokens.push t
-  # end
+  reader = Stone::LineNumberReader.new(text)
+  lexer  = Stone::Lexer.new(reader)
   
+  token = true
+  tokens = Array.new
+
+  while token != Stone::Token.EOF
+    token = lexer.read
+    tokens.push(token.get_text)
+  end
+
   erb :result, :locals => {:res => tokens}
 end

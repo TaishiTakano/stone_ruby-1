@@ -1,3 +1,7 @@
 <h1>結果ページ</h1>
-<p><%= res %></p>
+<ul>
+<% res.each_with_index do |token, i| %>
+ <li><%= i %>番目のトークン：<%= token %></li>
+<% end %>
+</ul>
 <a href='/'>戻る</a>
