@@ -1,38 +1,8 @@
-class Hoge
-  # @@tmp = "hogehoge"  
-  
-@@str = "str"
+require 'rubygems'
+require 'rparsec'
 
+lexer_num = RParsec::Parsers.number
+lexer_num_token = lexer_num.token(:num)
 
-  def initialize
-   @tmp = "piyopiyo"
-  end
-
-  def getStr
-    return @@str
-  end 
-
-  attr_accessor :tmp, :str
-end
-
-h = Hoge.new
-
-puts h.tmp
-puts h.getStr
-
-
-class SampleClass
-  def initialize(num)
-    @num = num
-  end
-
-  def getnum
-    @num
-  end
-end
-
-o = SampleClass.new(10)
-
-p o
-
-p o.getnum #=> 10
+lexer_num_lexeme = lexer_num_token.lexeme
+p lexer_num_lexeme.parse(' 1234 5678 9012 ')
