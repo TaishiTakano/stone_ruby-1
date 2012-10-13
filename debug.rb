@@ -1,18 +1,23 @@
-require './lib/lexer.rb'
-require './lib/token.rb'
+require './lib/line_number_reader'
+require './lib/lexer'
+require './lib/token'
 
 text = ""
 
 while true
   print ">>"
-  s = gets.chomp
-  if s == "Q" then break end
-  text +=  s
+  s = gets
+  if s.chomp == "Q" then break end
+  text += s
 end
 
-l = Lexer.new(text)
+reader = Stone::LineNumberReader.new(text)
+lexer  = Stone::Lexer.new(reader)
 
-tokens = Array.new()  
-tokens = l.read
+token = true
 
-p tokens
+while token != Stone::Token.EOF
+  token = lexer.read
+  print "token => "
+  p token.get_text
+end
