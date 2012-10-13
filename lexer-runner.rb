@@ -9,6 +9,7 @@ t = Token.new
 p l
 p t
 
-while (t = l.read()) != t.getEOF
+while (t = l.read()) != Token.new().getEOF
+  p t
   puts "=>" + t.getText()
 end

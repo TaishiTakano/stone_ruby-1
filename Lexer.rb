@@ -2,19 +2,19 @@
 
 class Lexer
 
-  def initialize(r)
-    # regexPat = "\\s*((//.*)|([0-9]+)|(\"(\\\\\"|\\\\\\\\|\\\\n|[^\"])*\")" + "|[A-Z_a-z][A-Z_a-z0-9]*|==|<=|>=|&&|\\|\\||\\p{Punct})?"
-    regexPat = ""
-    r = Regexp.new(regexPat)
+  def initialize
+    regexPat = "\\s*((//.*)|([0-9]+)|(\"(\\\\\"|\\\\\\\\|\\\\n|[^\"])*\")" + "|[A-Z_a-z][A-Z_a-z0-9]*|==|<=|>=|&&|\\|\\||\\p{Punct})?"
+    @pattern = Regexp.new(regexPat)
     @queue = []
     @hasMore = true
-    # @reader = r
   end
 
   def read
     if fillQueue 0
+      p "@queue.delete_at(0)"
       return @queue.delete_at(0)
     else
+      p "Token.new().getEOF"
       return  Token.new().getEOF
     end
   end
@@ -34,6 +34,7 @@ class Lexer
       else
         return false
       end
+      return true
     end
   end
   
@@ -44,10 +45,16 @@ class Lexer
       @hasMore = false
       return
     end
+
+    lineNo = 0
+    data = @pattern.match(@line)
+    
+    @queue.push(IdToken.new(lineNo, Token.new().getEOL))
+      
   end
   
   def addToken(lineNo, matcher)
-    puts 'addToken'
+    
   end
   
   def toStringLiteral(s)
@@ -57,8 +64,9 @@ class Lexer
   class NumToken < Token
     @value = nil
     
-    def NumToken(line, v)
-      puts 'NumToken.NumToken'
+    def initialize(line, v)
+      super(line)
+      @value = v
     end
 
     def isNumber
@@ -66,19 +74,20 @@ class Lexer
     end
     
     def getText
-      puts 'NumToken.getText'
+      return @value.to_s
     end
 
     def getNumber
-      puts 'NumToken.getNumber'
+      return @value.to_i
     end
   end
 
   class IdToken < Token
-    text = ''
+    @text = ""
     
-    def IdToken(line, id)
-      puts 'IdToken.IdToken'
+    def initialize(line, id)
+      super(line)
+      @text = id
     end
 
     def isidentifier
@@ -86,15 +95,16 @@ class Lexer
     end
 
     def getText
-      puts 'IdToken.getText'
+      return @text
     end
   end
 
   class StrToken < Token
-    literal = ''
+    @literal = ""
     
-    def StrToken(line, str)
-      puts 'StrToken.StrToken'
+    def initialize(line, str)
+      super(line)
+      @literal = str
     end
   
     def isString
@@ -102,7 +112,7 @@ class Lexer
     end
 
     def getText
-      puts 'StrToken.getText'
+      return @literal
     end
   end
 end
