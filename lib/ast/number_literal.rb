@@ -2,9 +2,12 @@
 module Ast
   class NumberLiteral < AstLeaf
   
-    def initialize()
-    
+    def initialize(t)
+      super(t)
     end
     
+    def value
+      return Token.new.get_number
+    end
   end
 end

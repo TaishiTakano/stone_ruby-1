@@ -2,9 +2,12 @@
 module Ast
   class Name < AstLeaf
   
-    def initialize()
-    
+    def initialize(t)
+      super(t)
     end
     
+    def name
+      return Token.new.get_text
+    end 
   end
 end
