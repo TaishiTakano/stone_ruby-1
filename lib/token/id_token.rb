@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 module Stone
   class IdToken < Token
-    attr :text
+    attr_reader :text
 
     def initialize(line_number, id)
       super(line_number)

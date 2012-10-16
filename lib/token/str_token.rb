@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 module Stone
   class StrToken < Token
-    attr :literal
+    attr_reader :literal
 
     def initialize(line_number, literal)
       super(line_number)
