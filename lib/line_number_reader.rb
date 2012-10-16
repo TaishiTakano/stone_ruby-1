@@ -5,7 +5,10 @@ module Stone
     attr_accessor :line_number
 
     def initialize(text)
-      @text = text.split
+      @text = Array.new
+      text.each_line do |line|
+        @text.push line
+      end
       @line_number = 0
     end
 
