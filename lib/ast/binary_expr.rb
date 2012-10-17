@@ -7,15 +7,16 @@ module Ast
     end
 
     def left
-      return @child(0)
+      return self.child 0
     end
 
     def operator
-      return @child(1).token.get_text
+      c = self.child 1
+      return c.token.get_text
     end
     
     def right
-      return @child(2)
+      return self.child 2
     end
   end
 end

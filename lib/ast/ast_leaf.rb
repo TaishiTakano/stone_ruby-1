@@ -30,4 +30,4 @@ module Ast
   end
 end
 
-require './../token.rb'
+require './lib/token'

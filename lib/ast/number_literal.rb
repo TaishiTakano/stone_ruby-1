@@ -7,7 +7,7 @@ module Ast
     end
     
     def value
-      return Token.new.get_number
+      return token.new.get_number
     end
   end
 end

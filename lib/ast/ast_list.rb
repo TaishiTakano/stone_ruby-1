@@ -7,7 +7,7 @@ module Ast
     end
 
     def child(i)
-      return @children.get(i)
+      return @children[i]
     end
     
     def num_children

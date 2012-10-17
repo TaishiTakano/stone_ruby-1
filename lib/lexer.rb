@@ -27,7 +27,15 @@ module Stone
         Token.EOF
       end
     end
- 
+
+    def peek(i)
+      if fill_queue i
+        return @queue[i]
+      else
+        return Token.EOF
+      end
+    end 
+
     def fill_queue(i)
       while i >= @queue.size
         if @has_more
